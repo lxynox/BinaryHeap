@@ -4,20 +4,23 @@
   "description": "js binary heap for fun",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha index.spec.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lxynox/BinaryHeap.git"
   },
   "keywords": [
-    "binary",
-    "heap"
+    "binary heap"
   ],
   "author": "lxynox",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/lxynox/BinaryHeap/issues"
   },
-  "homepage": "https://github.com/lxynox/BinaryHeap#readme"
+  "homepage": "https://github.com/lxynox/BinaryHeap#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
 }

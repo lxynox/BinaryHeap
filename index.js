@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 (function defineBinaryHeap(global, factory) {
   if (typeof exports === 'object' && exports && typeof exports.nodeName !== 'string') {
@@ -18,16 +18,18 @@
 
   // ## constructor function
 
-  BinaryHeap = function(comparator = (n1, n2) => n1 - n2, arr = []) {
+  BinaryHeap = function(arr = [], comparator = (n1, n2) => n1 - n2) {
     this.cmp = comparator
     this.content = [null]
 
-    if (!Array.isArray(arr))
-      throw 'use type [Object Array] for second param.'
+    if (!Array.isArray(arr)) {
+      throw new Error('use type [Object Array] for second param.')
+    }
 
     if (arr.length > 0) {
-      for (const e of arr)
+      for (const e of arr) {
         this.push(e)
+      }
     }
   }
 
@@ -40,13 +42,13 @@
   }
 
   BinaryHeap.prototype.__lessThan = function(n1, n2) {
-    this.cmp(n1, n2) < 0
+    return this.cmp(n1, n2) < 0
   }
 
   BinaryHeap.prototype.__bubble = function(index) {
-    let parentIndex = Math.floor(index >> 1)
+    let parentIndex = index >> 1
 
-    if (this._lessThan(this.content[index], this.content[parentIndex])) {
+    if (parentIndex > 0 && this.__lessThan(this.content[index], this.content[parentIndex])) {
       this.__swap(this.content, index, parentIndex)
       this.__bubble(parentIndex)
     }
@@ -57,10 +59,12 @@
     let lcIndex = 2*index
     let rcIndex = 2*index+1
 
-    if (lcIndex < this.content.length && this.__lessThan(this.content[minIndex], lcIndex))
-    minIndex = lcIndex
-    if (rcIndex < this.content.length && this.__lessThan(this.content[minIndex], rcIndex))
-    minIndex = rcIndex
+    if (lcIndex < this.content.length && this.__lessThan(this.content[lcIndex], this.content[minIndex])) {
+      minIndex = lcIndex
+    }
+    if (rcIndex < this.content.length && this.__lessThan(this.content[rcIndex], this.content[minIndex])) {
+      minIndex = rcIndex
+    }
 
     if (minIndex !== index) {
       this.__swap(this.content, minIndex, index)
@@ -69,14 +73,16 @@
   }
 
   BinaryHeap.prototype.__pop = function(index = 1) {
-    if (this.size() <= 0)
-      throw 'Cannot pop from an empty heap.'
-    if (index < 1 || index >= this.content.length)
-      throw 'Invalid index.'
+    if (this.size() <= 0) {
+      throw new Error('Cannot pop from an empty heap.')
+    }
+    if (index < 1 || index >= this.content.length) {
+      throw new Error('Invalid index.')
+    }
 
     let ret = this.content[index]
-
     let leaf = this.content.pop()
+
     if (index < this.content.length) {
       this.content[index] = leaf
       this.__sink(index)
@@ -87,13 +93,18 @@
 
   // ## apis
 
+  // ### isEmpty(): check if the heap is empty
+  BinaryHeap.prototype.isEmpty = function() {
+    return this.content.length === 1
+  }
+
   // ### size(): get the current size
   BinaryHeap.prototype.size = function() {
     return this.content.length - 1
   }
 
-  // ### top(): get the top element
-  BinaryHeap.prototype.top = function() {
+  // ### peek(): get the top element
+  BinaryHeap.prototype.peek = function() {
     return this.content[1]
   }
 
@@ -111,7 +122,7 @@
     try {
       ret = this.__pop()
     } catch (err) {
-      return ret
+      console.error('Failed to pop peek element:', err)
     }
 
     return ret
@@ -127,14 +138,15 @@
     let index = this.content.indexOf(e)
     let canRemove = false
 
-    if (index === -1)
+    if (index === -1) {
       return canRemove
+    }
 
     try {
       this.__pop(index)
       canRemove = true
     } catch(err) {
-      return canRemove
+      console.error('Failed to remove:', err)
     }
 
     return canRemove
