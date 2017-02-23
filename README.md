@@ -6,7 +6,7 @@ JS simple binary heap implementation
 ## Usage
 * Client(browser) side (access as globals `window.BinayHeap`)
 
-  hot inline link using `<script>` tag:
+  inline hot-link using `<script>` tag:
 
   `<script type='text/javascript' src='./BinaryHeap.js'></script>`
 
