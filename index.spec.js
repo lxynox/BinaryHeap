@@ -34,7 +34,7 @@ describe('Binary Heap', function() {
       })
     })
 
-    describe(' contains(), remove(e)', function() {
+    describe(' contains(),  remove(e)', function() {
       it('should contain 5, 10 after pushing [1, 5, 10, 100] to the heap', function() {
         for (const e of [1, 5, 10, 100])
           heap.push(e)
@@ -56,7 +56,7 @@ describe('Binary Heap', function() {
     var unsorted = [...Array(10).keys()].map(k => randInt(0, 100))
     var heap = new BHeap(unsorted)
 
-    it(' should sort an array in ascending order', function() {
+    it('should sort an array in ascending order', function() {
       var sorted = []
       while (! heap.isEmpty()) {
         sorted.push(heap.pop())
@@ -75,7 +75,7 @@ describe('Binary Heap', function() {
     var cmp = (o1, o2) => o2.id - o1.id
     var heap = new BHeap(objs, cmp)
 
-    it(' should sort the object array in descending order', function() {
+    it('should sort the object array in descending order', function() {
       var sorted = []
       while (! heap.isEmpty()) {
         sorted.push(heap.pop().id)
