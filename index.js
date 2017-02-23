@@ -93,29 +93,49 @@
 
   // ## apis
 
-  // ### isEmpty(): check if the heap is empty
+  // ### isEmpty()
+  /**
+   * [check if the heap is empty]
+   * @return {Boolean} [is empty or not]
+   */
   BinaryHeap.prototype.isEmpty = function() {
     return this.content.length === 1
   }
 
-  // ### size(): get the current size
+  // ### size()
+  /**
+   * [count the number of elements in current heap]
+   * @return {[Number]} [size of the heap]
+   */
   BinaryHeap.prototype.size = function() {
     return this.content.length - 1
   }
 
-  // ### peek(): get the top element
+  // ### peek()
+  /**
+   * [top element of current heap]
+   * @return {[Object]} [top element]
+   */
   BinaryHeap.prototype.peek = function() {
     return this.content[1]
   }
 
-  // ### push(e): push element into heap
+  // ### push(e)
+  /**
+   * [push element into heap]
+   * @param  {[Object]} e [element]
+   */
   BinaryHeap.prototype.push = function(e) {
     const index = this.content.push(e) - 1
 
     this.__bubble(index)
   }
 
-  // ### pop(): extract the top element from heap
+  // ### pop()
+  /**
+   * [remove top element from heap]
+   * @return {[Object]} [removed element]
+   */
   BinaryHeap.prototype.pop = function() {
     let ret = null
 
@@ -128,12 +148,22 @@
     return ret
   }
 
-  // ### contains(e): check if the heap contains Element e
+  // ### contains(e)
+  /**
+   * [check if contains target element]
+   * @param  {[Object]} e [target element]
+   * @return {[Boolean]}   [contains or not]
+   */
   BinaryHeap.prototype.contains = function(e) {
     return this.content.includes(e)
   }
 
-  // ### remove(e): remove the target element from heap
+  // ### remove(e)
+  /**
+   * [remove target element from heap]
+   * @param  {[Object]} e [target element]
+   * @return {[Boolean]}   [removed or not]
+   */
   BinaryHeap.prototype.remove = function(e) {
     let index = this.content.indexOf(e)
     let canRemove = false
